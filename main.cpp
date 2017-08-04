@@ -22,18 +22,6 @@ int main()
         cout << "ultimo Bloque Tabla disponible: " << mt.bm->ultimoBloqueTablaDisponible << endl;
     }
 
-    BloqueTabla* bt;
-    Bloque* bloque;
-    list<Bloque*>::reverse_iterator ri;
-    ri = mt.listaBloques.rbegin();
-    bloque = *ri;
-    cout << "...num del bloque " << bloque->numBloque << endl;
-    bt = (BloqueTabla*)bloque;
-    cout << "...num del bloqueT " << bt->numBloque << endl;
-    //mt.archivo->abrir("r+");
-    //bt->escribirEnDisco();
-    //bt->cerrarArchivo();
-
     mt.guardar_en_secudario_bloques();
 
 

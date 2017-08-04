@@ -85,7 +85,6 @@ void ManejarTabla::guardar_en_secudario_bloques()
             cout << "bc escribio...\n";
         }
     }
-    archivo->cerrar();
 }
 
 void ManejarTabla::subir_bloques_a_primario()
