@@ -1,0 +1,62 @@
+# depslib dependency file v1.0
+1501866313 source:c:\users\ivand\documents\codeblocks proyects\dbe\main.cpp
+	<iostream>
+	<stdio.h>
+	<BloqueTabla.h>
+	<BloqueCampo.h>
+	<BloqueMaestro.h>
+	<ManejadorBloques.h>
+	<DataFile.h>
+
+1501782274 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\datafile.cpp
+	"DataFile.h"
+
+1501782291 c:\users\ivand\documents\codeblocks proyects\dbe\include\datafile.h
+	<stdio.h>
+
+1501782371 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloque.cpp
+	"Bloque.h"
+
+1501782371 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloque.h
+	<DataFile.h>
+	<stdio.h>
+	<string.h>
+
+1501783907 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquecampo.cpp
+	"BloqueCampo.h"
+
+1501783980 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloquecampo.h
+	<Bloque.h>
+
+1501866995 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquetabla.cpp
+	"BloqueTabla.h"
+
+1501843180 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloquetabla.h
+	<Bloque.h>
+	<BloqueCampo.h>
+	<Tabla.h>
+	<list>
+	<iostream>
+
+1501791484 c:\users\ivand\documents\codeblocks proyects\dbe\include\tabla.h
+	<string.h>
+
+1501791575 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\tabla.cpp
+	"Tabla.h"
+
+1501840842 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquemaestro.cpp
+	"BloqueMaestro.h"
+
+1501846506 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloquemaestro.h
+	<Bloque.h>
+
+1501868096 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\manejadorbloques.cpp
+	"ManejadorBloques.h"
+
+1501864158 c:\users\ivand\documents\codeblocks proyects\dbe\include\manejadorbloques.h
+	<BloqueTabla.h>
+	<BloqueMaestro.h>
+	<DataFile.h>
+	<list>
+	<iostream>
+
