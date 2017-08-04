@@ -12,14 +12,15 @@ ManejarTabla::~ManejarTabla()
     //dtor
 }
 
-void ManejarTabla::listarTablas()
+void ManejarTabla::listarBloqueTablas()
 {
     std::list<Bloque*>::iterator i;
+    BloqueTabla* tmp;
+    printf("Los Bloques Tablas estan en las posiciones: %c", '\n');
     for (i = listaBloques.begin(); i != listaBloques.end(); i++)
     {
-        BloqueTabla* tmp;
         tmp = (BloqueTabla*)*i;
-        printf("%s", "Boque: ");
+        printf("%s", "Boque Tabla: ");
         printf("%i", tmp->numBloque);
         printf("%c", '\n');
     }
@@ -29,18 +30,18 @@ void ManejarTabla::addBloqueTabla()
 {
     listaBloques.push_front(new BloqueTabla(bm->ultimoBloqueTablaDisponible++));
     bm->ultimoBloqueCampo++;
-    bm->abrirArchivo("r+");
-    bm->escribirEnDisco();
-    bm->cerrarArchivo();
+//    bm->abrirArchivo("r+");
+//    bm->escribirEnDisco();
+//    bm->cerrarArchivo();
     //bloqueTablas.front()->siguiente = bm->ultimoBloqueTablaDisponible - 1;
 }
 
 void ManejarTabla::addBloqueCampo()
 {
     listaBloques.push_front(new BloqueCampo(bm->ultimoBloqueCampo++));
-    //bm->abrirArchivo("r+");
-    //bm->escribirEnDisco();
-    //bm->cerrarArchivo();
+//    bm->abrirArchivo("r+");
+//    bm->escribirEnDisco();
+//    bm->cerrarArchivo();
 }
 
 void ManejarTabla::addBloqueMaestro()
@@ -85,6 +86,10 @@ void ManejarTabla::guardar_en_secudario_bloques()
             cout << "bc escribio...\n";
         }
     }
+    cout << "ultimo segun master: " << bm->ultimoBloqueTablaDisponible;
+    bm->abrirArchivo("r+");
+    bm->escribirEnDisco();
+    bm->cerrarArchivo();
 }
 
 void ManejarTabla::subir_bloques_a_primario()
@@ -181,7 +186,22 @@ void ManejarTabla::addTabla(char nombre[20], int pbr, int ubr, int pr, int ud)
     }
 }
 
-void ManejarTabla::guardar_un_bloque_tabla()
+void ManejarTabla::subir_bloques_tablas()
 {
-
+    bm = getBloqueMasterFromDisco();
+    BloqueTabla* bt = new BloqueTabla(1);
+    bt->abrirArchivo("r");
+    bt->cargarDesdeDisco();
+    bt->cerrarArchivo();
+    listaBloques.push_back(bt);
+    int next;
+    while (bt->siguiente != -1)
+    {
+        next = bt->siguiente;
+        bt = new BloqueTabla(next);
+        bt->abrirArchivo("r");
+        bt->cargarDesdeDisco();
+        bt->cerrarArchivo();
+        listaBloques.push_back(bt);
+    }
 }

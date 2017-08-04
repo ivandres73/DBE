@@ -1,12 +1,14 @@
 # depslib dependency file v1.0
-1501866313 source:c:\users\ivand\documents\codeblocks proyects\dbe\main.cpp
+1501870292 source:c:\users\ivand\documents\codeblocks proyects\dbe\main.cpp
 	<iostream>
 	<stdio.h>
+	<Bloque.h>
 	<BloqueTabla.h>
 	<BloqueCampo.h>
 	<BloqueMaestro.h>
 	<ManejadorBloques.h>
 	<DataFile.h>
+	<list>
 
 1501782274 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\datafile.cpp
 	"DataFile.h"
@@ -50,10 +52,10 @@
 1501846506 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloquemaestro.h
 	<Bloque.h>
 
-1501868096 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\manejadorbloques.cpp
+1501870267 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\manejadorbloques.cpp
 	"ManejadorBloques.h"
 
-1501864158 c:\users\ivand\documents\codeblocks proyects\dbe\include\manejadorbloques.h
+1501870267 c:\users\ivand\documents\codeblocks proyects\dbe\include\manejadorbloques.h
 	<BloqueTabla.h>
 	<BloqueMaestro.h>
 	<DataFile.h>
