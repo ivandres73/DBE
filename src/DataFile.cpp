@@ -35,7 +35,7 @@ void DataFile::escribir(char* datos, int pos, int longitud)
 
 char* DataFile::leer(int pos, int longitud)
 {
-    char datos[longitud];
+    char* datos = new char[longitud];
     fseek(archivo, pos, SEEK_SET);
     fread(datos , sizeof(char), longitud, archivo);
     return datos;

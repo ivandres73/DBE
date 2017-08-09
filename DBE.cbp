@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -32,7 +34,21 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Bloque.h" />
+		<Unit filename="include/BloqueCampo.h" />
+		<Unit filename="include/BloqueMaestro.h" />
+		<Unit filename="include/BloqueTabla.h" />
+		<Unit filename="include/DataFile.h" />
+		<Unit filename="include/ManejadorBloques.h" />
+		<Unit filename="include/Tabla.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Bloque.cpp" />
+		<Unit filename="src/BloqueCampo.cpp" />
+		<Unit filename="src/BloqueMaestro.cpp" />
+		<Unit filename="src/BloqueTabla.cpp" />
+		<Unit filename="src/DataFile.cpp" />
+		<Unit filename="src/ManejadorBloques.cpp" />
+		<Unit filename="src/Tabla.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

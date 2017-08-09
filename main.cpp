@@ -13,19 +13,25 @@ using namespace std;
 
 int main()
 {
-    ManejarTabla mt = ManejarTabla();
+    ManejarBloque mt = ManejarBloque();
     //mt.formatearArchivo();
 
-//    for (int i=0; i < 40; i++)
+//    for (int i=0; i < 1000; i++)
 //    {
 //        mt.addTabla("Tabla_", 0, 0, 0, 0);
 //        cout << "ultimo Bloque Tabla disponible: " << mt.bm->ultimoBloqueTablaDisponible << endl;
 //    }
 
+
+
     //mt.guardar_en_secudario_bloques();
 
     mt.subir_bloques_tablas();
     mt.listarBloqueTablas();
+
+    BloqueTabla* bt = mt.getBloqueTablaFromDisco(1081);
+    bt->imprimirTablas();
+
 
     return 0;
 }

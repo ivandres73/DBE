@@ -10,11 +10,11 @@
 #include <iostream>
 using namespace std;
 
-class ManejarTabla
+class ManejarBloque
 {
     public:
-        ManejarTabla();
-        virtual ~ManejarTabla();
+        ManejarBloque();
+        virtual ~ManejarBloque();
         //atributos
         std::list<Bloque*> listaBloques;
         DataFile* archivo;
