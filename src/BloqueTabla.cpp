@@ -25,9 +25,9 @@ void BloqueTabla::cargarDesdeDisco()
 
 void BloqueTabla::escribirEnDisco()
 {
-    char* data = this->bloqueToChar();
+    char* data = new char[tamBloque];
+    data = this->bloqueToChar();
     int pos = numBloque * tamBloque;
-    cout << "el toChar pijudo\n";
     archivo->escribir(data, pos, tamBloque);
 }
 
@@ -43,14 +43,15 @@ char* BloqueTabla::bloqueToChar()
     pos += 4;
     memcpy(&data[pos], &cantidadTablas, 4);
     pos += 4;
-//    list<Tabla*>::iterator i;
-//    for (i = tablas->begin(); i != tablas->end(); i++)
-//    {
-//        Tabla* tmp = *i;
-//        char* datoTabla = tmp->toChar();
-//        memcpy(&data[pos], &datoTabla, 44);
-//        pos += 44;
-//    }
+    list<Tabla*>::iterator i;
+    for (i = tablas->begin(); i != tablas->end(); i++)
+    {
+        Tabla* tmp = *i;
+        char* datoTabla = new char[44];
+        datoTabla = tmp->toChar();
+        memcpy(&data[pos], datoTabla, 44);
+        pos += 44;
+    }
     return data;
 }
 
@@ -67,8 +68,9 @@ void BloqueTabla::charToBloque(char* datos)
     pos += 4;
     for (int i = 0; i < cantidadTablas; i++)
     {
-        Tabla *tabla = new Tabla("vacio", 0, 0, 0, 0, 0, 0);
+        Tabla* tabla = new Tabla("vacio", 0, 0, 0, 0, 0, 0);
         tabla->charToTabla(&datos[pos]);
+        //cout << tabla->nombre << endl;
         tablas->push_back(tabla);
         pos += 44;
     }
@@ -78,10 +80,10 @@ void BloqueTabla::charToBloque(char* datos)
 bool BloqueTabla::agregarTabla(char nombre[20], int id, int pbr, int ubr, int pr, int ud)
 {
     Tabla* nuevo = new Tabla(nombre, id, pbr, ubr, pr, ud, numBloque);
-    cout << "espacio libre: " << (int)((tamBloque - 4 - 4) / 44)-cantidadTablas << endl;
-    if (cantidadTablas < (tamBloque - sizeof(numBloque) - sizeof(siguiente)) / 44)
+    //cout << "espacio libre: " << (int)((tamBloque - 4 - 4 - 4) / 44)-cantidadTablas << endl;
+    if (cantidadTablas < (tamBloque - sizeof(numBloque) - sizeof(siguiente) - sizeof(cantidadTablas) - sizeof(tamBloque)) / 44)
     {
-        tablas->push_front(nuevo);
+        tablas->push_back(nuevo);
         cantidadTablas++;
         return true;
     }
@@ -105,4 +107,18 @@ void BloqueTabla::asignarBloqueCampo(int id, BloqueCampo* bloque)
         }
     }
     printf("no se encontro la tabla con ese id %c", '\n');
+}
+
+void BloqueTabla::imprimirTablas()
+{
+    list<Tabla*>::iterator i;
+    Tabla* tmp;
+    for (i = tablas->begin(); i != tablas->end(); i++)
+    {
+        tmp = *i;
+        printf("Nombre de Tabla: %s,", tmp->nombre);
+        printf(" ID de tabla: %i,", tmp->id);
+        printf(" Num del primer Bloque Campo de esta tabla: %i", tmp->primerBloqueCampos);
+        printf("%c", '\n');
+    }
 }

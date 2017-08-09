@@ -5,9 +5,9 @@ Tabla::Tabla()
     //ctor
 }
 
-Tabla::Tabla(char n[20], int i, int p, int u, int pd, int ad, int nbp)
+Tabla::Tabla(char* n, int i, int p, int u, int pd, int ad, int nbp)
 {
-    //nombre = n;
+    strcpy(nombre, n);
     id = i;
     primerBloqueCampos = p;
     ultimoBloqueCampos = u;
@@ -23,9 +23,9 @@ Tabla::~Tabla()
 
 char* Tabla::toChar()//pesa 44 bytes sumando todos los atributos
 {
-    char datos[44];
+    char* datos = new char[44];
     int pos = 0;
-    memcpy(&datos[pos], &nombre, sizeof(nombre));
+    memcpy(&datos[pos], nombre, 20);
     pos += 20;
     memcpy(&datos[pos], &id, sizeof(int));
     pos += 4;
@@ -45,18 +45,18 @@ char* Tabla::toChar()//pesa 44 bytes sumando todos los atributos
 void Tabla::charToTabla(char* datos)
 {
     int pos = 0;
-    memcpy(&nombre, &datos[pos], sizeof(nombre));
+    memcpy(nombre, &datos[pos], 20);
     pos += 20;
-    memcpy(&id, &datos[pos], sizeof(int));
+    memcpy(&id, &datos[pos], 4);
     pos += 4;
-    memcpy(&primerBloqueCampos, &datos[pos], sizeof(int));
+    memcpy(&primerBloqueCampos, &datos[pos], 4);
     pos += 4;
-    memcpy(&ultimoBloqueCampos, &datos[pos], sizeof(int));
+    memcpy(&ultimoBloqueCampos, &datos[pos], 4);
     pos += 4;
-    memcpy(&primerDatos, &datos[pos], sizeof(int));
+    memcpy(&primerDatos, &datos[pos], 4);
     pos += 4;
-    memcpy(&actualDatos, &datos[pos], sizeof(int));
+    memcpy(&actualDatos, &datos[pos], 4);
     pos += 4;
-    memcpy(&numBloquePadre, &datos[pos], sizeof(int));
+    memcpy(&numBloquePadre, &datos[pos], 4);
     pos += 4;
 }

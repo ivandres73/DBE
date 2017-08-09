@@ -1,18 +1,18 @@
 #include "ManejadorBloques.h"
 
-ManejarTabla::ManejarTabla()
+ManejarBloque::ManejarBloque()
 {
     archivo = new DataFile("C:\\Users\\ivand\\Desktop\\archivo.ivan");
     archivo->abrir("a");
     archivo->cerrar();
 }
 
-ManejarTabla::~ManejarTabla()
+ManejarBloque::~ManejarBloque()
 {
     //dtor
 }
 
-void ManejarTabla::listarBloqueTablas()
+void ManejarBloque::listarBloqueTablas()
 {
     std::list<Bloque*>::iterator i;
     BloqueTabla* tmp;
@@ -26,7 +26,7 @@ void ManejarTabla::listarBloqueTablas()
     }
 }
 
-void ManejarTabla::addBloqueTabla()
+void ManejarBloque::addBloqueTabla()
 {
     listaBloques.push_front(new BloqueTabla(bm->ultimoBloqueTablaDisponible++));
     bm->ultimoBloqueCampo++;
@@ -36,7 +36,7 @@ void ManejarTabla::addBloqueTabla()
     //bloqueTablas.front()->siguiente = bm->ultimoBloqueTablaDisponible - 1;
 }
 
-void ManejarTabla::addBloqueCampo()
+void ManejarBloque::addBloqueCampo()
 {
     listaBloques.push_front(new BloqueCampo(bm->ultimoBloqueCampo++));
 //    bm->abrirArchivo("r+");
@@ -44,7 +44,7 @@ void ManejarTabla::addBloqueCampo()
 //    bm->cerrarArchivo();
 }
 
-void ManejarTabla::addBloqueMaestro()
+void ManejarBloque::addBloqueMaestro()
 {
     bm = new BloqueMaestro(0);
     bm->abrirArchivo("r+");
@@ -52,7 +52,7 @@ void ManejarTabla::addBloqueMaestro()
     bm->cerrarArchivo();
 }
 
-void ManejarTabla::guardar_en_secudario_bloques()
+void ManejarBloque::guardar_en_secudario_bloques()
 {
     BloqueTabla* tmp;
     BloqueCampo* bc;
@@ -92,7 +92,7 @@ void ManejarTabla::guardar_en_secudario_bloques()
     bm->cerrarArchivo();
 }
 
-void ManejarTabla::subir_bloques_a_primario()
+void ManejarBloque::subir_bloques_a_primario()
 {
     archivo->abrir("r");
     ///POR AQUI ME QUEDE
@@ -105,7 +105,7 @@ void ManejarTabla::subir_bloques_a_primario()
     archivo->cerrar();
 }
 
-BloqueTabla* ManejarTabla::getBloqueTablaFromDisco(int indice)
+BloqueTabla* ManejarBloque::getBloqueTablaFromDisco(int indice)
 {
     archivo->abrir("r");
     BloqueTabla* bloque = new BloqueTabla(indice);
@@ -117,7 +117,7 @@ BloqueTabla* ManejarTabla::getBloqueTablaFromDisco(int indice)
     return bloque;
 }
 
-BloqueMaestro* ManejarTabla::getBloqueMasterFromDisco()
+BloqueMaestro* ManejarBloque::getBloqueMasterFromDisco()
 {
     archivo->abrir("r");
     BloqueMaestro* bloque = new BloqueMaestro(0);
@@ -129,7 +129,7 @@ BloqueMaestro* ManejarTabla::getBloqueMasterFromDisco()
     return bloque;
 }
 
-void ManejarTabla::formatearArchivo()
+void ManejarBloque::formatearArchivo()
 {
     archivo->abrir("w");
     archivo->cerrar();
@@ -137,7 +137,7 @@ void ManejarTabla::formatearArchivo()
     addBloqueTabla();
 }
 
-void ManejarTabla::addTabla(char nombre[20], int pbr, int ubr, int pr, int ud)
+void ManejarBloque::addTabla(char nombre[20], int pbr, int ubr, int pr, int ud)
 {
     if (listaBloques.empty())
     {
@@ -186,7 +186,7 @@ void ManejarTabla::addTabla(char nombre[20], int pbr, int ubr, int pr, int ud)
     }
 }
 
-void ManejarTabla::subir_bloques_tablas()
+void ManejarBloque::subir_bloques_tablas()
 {
     bm = getBloqueMasterFromDisco();
     BloqueTabla* bt = new BloqueTabla(1);
