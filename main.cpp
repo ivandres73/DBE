@@ -27,7 +27,10 @@ void pruebaEscribir(ManejarBloque& mt)
 
     for (int i=0; i < 9; i++)
     {
-        mt.agregarCampos(i+1, "Campo_", 1);
+        mt.agregarCampos(i+1, "Nombre", 1);
+        mt.agregarCampos(i+1, "Apellido", 1);
+        mt.agregarCampos(i+1, "Edad", 0);
+        mt.agregarCampos(i+1, "Direccion", 1);
     }
 
 }
