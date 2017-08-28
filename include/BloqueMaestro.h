@@ -10,6 +10,7 @@ class BloqueMaestro : public Bloque
         virtual ~BloqueMaestro();
         //atributos
         int ultimoBloqueTablaDisponible;
+        int cantidadTablas;
         int ultimoBloqueCampo;
         //funciones
         void escribirEnDisco();

@@ -3,6 +3,7 @@
 
 
 #include <BloqueTabla.h>
+#include <Tabla.h>
 #include <BloqueMaestro.h>
 #include <DataFile.h>
 #include <list>
@@ -19,18 +20,23 @@ class ManejarBloque
         std::list<Bloque*> listaBloques;
         DataFile* archivo;
         BloqueMaestro* bm;
+        BloqueTabla* bt;
+        BloqueCampo* bc;
         //funciones
         void listarBloqueTablas();
         void addBloqueTabla();
         void addBloqueCampo();
         void addBloqueMaestro();
-        void addTabla(char nombre[20], int pbr, int ubr, int pr, int ud);
+        void addTabla(char* nombre, int pr, int ud);
         void guardar_en_secudario_bloques();
         void subir_bloques_a_primario();
         void subir_bloques_tablas();
         void formatearArchivo();
+        void agregarCampos(int, char*, bool);///trabajar en esta luego
+        void printCamposFrom(int);
         BloqueTabla* getBloqueTablaFromDisco(int);
         BloqueMaestro* getBloqueMasterFromDisco();
+        BloqueCampo* getBloqueCampoFromDisco(int);
 
     protected:
 

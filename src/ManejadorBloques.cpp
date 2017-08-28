@@ -5,6 +5,8 @@ ManejarBloque::ManejarBloque()
     archivo = new DataFile("C:\\Users\\ivand\\Desktop\\archivo.ivan");
     archivo->abrir("a");
     archivo->cerrar();
+    bt = 0;
+    bc = 0;
 }
 
 ManejarBloque::~ManejarBloque()
@@ -16,11 +18,11 @@ void ManejarBloque::listarBloqueTablas()
 {
     std::list<Bloque*>::iterator i;
     BloqueTabla* tmp;
-    printf("Los Bloques Tablas estan en las posiciones: %c", '\n');
+    printf("%cLos Bloques Tablas estan en las posiciones: %c", '\n', '\n');
     for (i = listaBloques.begin(); i != listaBloques.end(); i++)
     {
         tmp = (BloqueTabla*)*i;
-        printf("%s", "Boque Tabla: ");
+        printf("%s", "Bloque Tabla: ");
         printf("%i", tmp->numBloque);
         printf("%c", '\n');
     }
@@ -58,7 +60,7 @@ void ManejarBloque::guardar_en_secudario_bloques()
     BloqueCampo* bc;
     Bloque* block;
     list<Bloque*>::reverse_iterator ri;
-    int target = 1;
+    int target = 1;///SETEARLO A 1, ASI VUELVE A FUNCIONAR PARA BLOQUES TABLAS
     for (ri = listaBloques.rbegin(); ri != listaBloques.rend(); ri++)
     {
         cout << "entro al for\n";
@@ -80,6 +82,7 @@ void ManejarBloque::guardar_en_secudario_bloques()
             cout << "reconocio que es Bcampo\n";
             bc = (BloqueCampo*)block;
             cout << "el num de bloque es: " << bc->numBloque << endl;
+            cout << "Cantidad de Campos: " << bc->cantidadDeCampos << endl;
             bc->abrirArchivo("r+");
             bc->escribirEnDisco();
             bc->cerrarArchivo();
@@ -109,7 +112,6 @@ BloqueTabla* ManejarBloque::getBloqueTablaFromDisco(int indice)
 {
     archivo->abrir("r");
     BloqueTabla* bloque = new BloqueTabla(indice);
-    bloque->numBloque = 73;
     char* datos = archivo->leer(indice*512, 512);//quitarla luego pero mejor no, porque funciona
     bloque->charToBloque(datos);//quitarla luego pero mejor no, porque funciona
     //bloque->cargarDesdeDisco();
@@ -121,7 +123,6 @@ BloqueMaestro* ManejarBloque::getBloqueMasterFromDisco()
 {
     archivo->abrir("r");
     BloqueMaestro* bloque = new BloqueMaestro(0);
-    bloque->numBloque = 73;
     char* datos = archivo->leer(0, 512);//quitarla luego pero mejor no, porque funciona
     bloque->charToBloque(datos);//quitarla luego pero mejor no, porque funciona
     //bloque->cargarDesdeDisco();
@@ -137,10 +138,11 @@ void ManejarBloque::formatearArchivo()
     addBloqueTabla();
 }
 
-void ManejarBloque::addTabla(char nombre[20], int pbr, int ubr, int pr, int ud)
+void ManejarBloque::addTabla(char* nombre, int pr, int ud)
 {
     if (listaBloques.empty())
     {
+        bm = getBloqueMasterFromDisco();
         addBloqueTabla();
     }
     list<Bloque*>::iterator i;
@@ -161,12 +163,13 @@ void ManejarBloque::addTabla(char nombre[20], int pbr, int ubr, int pr, int ud)
         }
     }
 
-    if (bt->agregarTabla(nombre, bt->cantidadTablas, bm->ultimoBloqueCampo, ubr, pr, ud))
+    if (bt->agregarTabla(nombre, bm->cantidadTablas, bm->ultimoBloqueCampo, bm->ultimoBloqueCampo, pr, ud))
     {
         cout << "agregue tabla..." << endl;
         addBloqueCampo();
         BloqueCampo* bc = (BloqueCampo*)listaBloques.front();
         bc->siguiente = bm->ultimoBloqueCampo;
+        cout << "Yo tengo " << bc->cantidadDeCampos << " campos\n";
         cout << "el sig del blo campo: " << bc->siguiente << endl;
         cout << "ultimo bloque campo disp es: " << bm->ultimoBloqueCampo << endl;
     }
@@ -180,22 +183,26 @@ void ManejarBloque::addTabla(char nombre[20], int pbr, int ubr, int pr, int ud)
         listaBloques.front()->siguiente = -1;
         addBloqueTabla();
         bt = (BloqueTabla*)listaBloques.front();
-        bt->agregarTabla(nombre, bt->cantidadTablas, bm->ultimoBloqueCampo, ubr, pr, ud);
+        bt->agregarTabla(nombre, bm->cantidadTablas, bm->ultimoBloqueCampo, bm->ultimoBloqueCampo, pr, ud);
         addBloqueCampo();
         //bt->tablas->front()->ultimoBloqueCampos = bm->ultimoBloqueCampo - 1;
     }
+    bm->cantidadTablas++;
 }
 
 void ManejarBloque::subir_bloques_tablas()
 {
     bm = getBloqueMasterFromDisco();
+    cout << bm->ultimoBloqueTablaDisponible << endl;
     BloqueTabla* bt = new BloqueTabla(1);
     bt->abrirArchivo("r");
     bt->cargarDesdeDisco();
     bt->cerrarArchivo();
     listaBloques.push_back(bt);
     int next;
-    while (bt->siguiente != -1)
+    cout << "num de este bt: " << bt->numBloque << endl;
+    cout << "bt->siguiente: " << bt->siguiente << endl;
+    do
     {
         next = bt->siguiente;
         bt = new BloqueTabla(next);
@@ -203,5 +210,75 @@ void ManejarBloque::subir_bloques_tablas()
         bt->cargarDesdeDisco();
         bt->cerrarArchivo();
         listaBloques.push_back(bt);
+    } while (bt->siguiente != -1);
+}
+
+BloqueCampo* ManejarBloque::getBloqueCampoFromDisco(int id)
+{
+    archivo->abrir("r");
+    BloqueCampo* bloque = new BloqueCampo(id);
+    //bloque->archivo = new DataFile("C:\\Users\\ivand\\Desktop\\archivo.ivan");
+    //bloque->abrirArchivo("r");
+    //bloque->cargarDesdeDisco();
+    //bloque->cerrarArchivo();
+    char* datos = archivo->leer(id*512, 512);
+    bloque->charToBloque(datos);
+    archivo->cerrar();
+    return bloque;
+}
+
+void ManejarBloque::agregarCampos(int tablaID, char* nombre, bool tipoDato)
+{
+    list<Bloque*>::reverse_iterator i;
+    Bloque* block;
+    int target = 1;
+    if (listaBloques.empty())
+    {
+        cout << "esta vacia\n";
     }
+    for (i = listaBloques.rbegin(); i != listaBloques.rend(); i++)
+    {
+        block = *i;
+        bt = (BloqueTabla*)block;
+        if (bt->numBloque == target)
+        {
+            list<Tabla*>::iterator ti;
+            for (ti = bt->tablas->begin(); ti != bt->tablas->end(); ti++)
+            {
+                Tabla* table = *ti;
+                if (table->id == tablaID)
+                {
+                    cout << "encontre la tabla...\n";
+                    bc = new BloqueCampo(table->ultimoBloqueCampos);
+                    bc->abrirArchivo("r");
+                    bc->cargarDesdeDisco();
+                    bc->cerrarArchivo();
+                    cout << "num del bloque campo: " << bc->numBloque << endl;
+                    break;
+                }
+            }
+            target = bt->siguiente;
+        }
+        if (target == -1)
+        {
+            break;
+        }
+    }
+
+    if (bc->agregarCampo(nombre, tipoDato))
+    {
+        cout << "agregue campo..." << endl;
+        cout << "Yo tengo " << bc->cantidadDeCampos << " campos\n";
+        cout << "ultimo bloque campo disp es: " << bm->ultimoBloqueCampo << endl;
+    }
+    else
+    {
+        printf("---------------se creara un nuevo bloque de campos %c", '\n');
+        addBloqueCampo();
+        bc = (BloqueCampo*)listaBloques.front();
+        bc->agregarCampo(nombre, tipoDato);
+    }
+    bc->abrirArchivo("r+");
+    bc->escribirEnDisco();
+    bc->cerrarArchivo();
 }

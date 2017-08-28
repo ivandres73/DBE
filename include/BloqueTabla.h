@@ -25,7 +25,7 @@ class BloqueTabla : public Bloque
         void charToBloque(char*);
         void imprimirTablas();
         //funciones propias
-        bool agregarTabla(char[20], int, int, int, int, int);
+        bool agregarTabla(char*, int, int, int, int, int);
         void asignarBloqueCampo(int, BloqueCampo*);
 
     protected:

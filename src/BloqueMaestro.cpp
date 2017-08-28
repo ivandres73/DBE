@@ -4,6 +4,8 @@ BloqueMaestro::BloqueMaestro(int num) : Bloque (num)
 {
     ultimoBloqueTablaDisponible = 1;
     ultimoBloqueCampo = 1;
+    cantidadTablas = 1;
+    archivo = new DataFile("C:\\Users\\ivand\\Desktop\\archivo.ivan");
 }
 
 BloqueMaestro::~BloqueMaestro()
@@ -39,6 +41,8 @@ char* BloqueMaestro::bloqueToChar()
     pos += 4;
     memcpy(&data[pos], &ultimoBloqueCampo, 4);
     pos += 4;
+    memcpy(&data[pos], &cantidadTablas, 4);
+    pos += 4;
     return data;
 }
 
@@ -54,5 +58,7 @@ void BloqueMaestro::charToBloque(char* datos)
     memcpy(&ultimoBloqueTablaDisponible, &datos[pos], 4);
     pos += 4;
     memcpy(&ultimoBloqueCampo, &datos[pos], 4);
+    pos += 4;
+    memcpy(&cantidadTablas, &datos[pos], 4);
     pos += 4;
 }

@@ -7,7 +7,8 @@ BloqueCampo::BloqueCampo()
 
 BloqueCampo::BloqueCampo(int num) : Bloque(num)
 {
-
+    campos = new list<Campo*>;
+    cantidadDeCampos = 0;
 }
 
 BloqueCampo::~BloqueCampo()
@@ -24,7 +25,8 @@ void BloqueCampo::cargarDesdeDisco()
 
 void BloqueCampo::escribirEnDisco()
 {
-    char* data = this->bloqueToChar();
+    char* data = new char[tamBloque];
+    data = this->bloqueToChar();
     int pos = numBloque * tamBloque;
     archivo->escribir(data, pos, tamBloque);
 }
@@ -39,6 +41,18 @@ char* BloqueCampo::bloqueToChar()
     pos += 4;
     memcpy(&data[pos], &siguiente, 4);
     pos += 4;
+    memcpy(&data[pos], &cantidadDeCampos, 4);
+    pos += 4;
+    list<Campo*>::iterator i;
+    Campo* tmp = new Campo();
+    for (i = campos->begin(); i != campos->end(); i++)
+    {
+        tmp = *i;
+        char* datoCampos = new char[27];
+        datoCampos = tmp->toChar();
+        memcpy(&data[pos], &datoCampos[0], 27);
+        pos += 27;
+    }
     return data;
 }
 
@@ -51,4 +65,55 @@ void BloqueCampo::charToBloque(char* datos)
     pos += 4;
     memcpy(&siguiente, &datos[pos], 4);
     pos += 4;
+    memcpy(&cantidadDeCampos, &datos[pos], 4);
+    pos += 4;
+    for (int i=0; i < cantidadDeCampos; i++)
+    {
+        char* datoCampos = new char[27];
+        memcpy(&datoCampos[0], &datos[pos], 27);
+        Campo* nuevo = new Campo();
+        nuevo->charToCampo(datoCampos);
+        campos->push_back(nuevo);
+        pos += 27;
+    }
+}
+
+bool BloqueCampo::agregarCampo(char* nombre, bool tipo)
+{
+    Campo* nuevo = new Campo(nombre, tipo, numBloque);
+    int camposDisponible = (tamBloque-4-4-4-4)/27;
+    if (cantidadDeCampos < 9) // deberia de ser (cantidadDeCampos < camposDisponible)
+    {
+        campos->push_back(nuevo);
+        cantidadDeCampos++;
+        return true;
+    }
+    else
+    {
+        printf("No hay espacio para mas campos %c", '\n');
+        return false;
+    }
+}
+
+void BloqueCampo::asignarBloqueRegistros(int/*, BloqueRegistro*/)
+{
+
+}
+
+
+void BloqueCampo::printCampos()
+{
+    list<Campo*>::iterator i;
+    for (i = campos->begin(); i != campos->end(); i++)
+    {
+        Campo* tmp = *i;
+        printf("Nombre del Campo: %s", tmp->nombre);
+        printf("%c", '\n');
+        cout << "tipo del campo: " << tmp->tipo;
+        printf("%c", '\n');
+        cout << "tamano de un registro del campo: " << tmp->tamano;
+        printf("%c", '\n');
+        printf("num de mi Bloque papa: %i", tmp->numBloquePadre);
+        printf("%c", '\n');
+    }
 }

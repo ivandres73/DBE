@@ -7,7 +7,7 @@ Tabla::Tabla()
 
 Tabla::Tabla(char* n, int i, int p, int u, int pd, int ad, int nbp)
 {
-    strcpy(nombre, n);
+    strncpy(nombre, n, 20);
     id = i;
     primerBloqueCampos = p;
     ultimoBloqueCampos = u;
@@ -27,17 +27,17 @@ char* Tabla::toChar()//pesa 44 bytes sumando todos los atributos
     int pos = 0;
     memcpy(&datos[pos], nombre, 20);
     pos += 20;
-    memcpy(&datos[pos], &id, sizeof(int));
+    memcpy(&datos[pos], &id, 4);
     pos += 4;
-    memcpy(&datos[pos], &primerBloqueCampos, sizeof(int));
+    memcpy(&datos[pos], &primerBloqueCampos, 4);
     pos += 4;
-    memcpy(&datos[pos], &ultimoBloqueCampos, sizeof(int));
+    memcpy(&datos[pos], &ultimoBloqueCampos, 4);
     pos += 4;
-    memcpy(&datos[pos], &primerDatos, sizeof(int));
+    memcpy(&datos[pos], &primerDatos, 4);
     pos += 4;
-    memcpy(&datos[pos], &actualDatos, sizeof(int));
+    memcpy(&datos[pos], &actualDatos, 4);
     pos += 4;
-    memcpy(&datos[pos], &numBloquePadre, sizeof(int));
+    memcpy(&datos[pos], &numBloquePadre, 4);
     pos += 4;
     return datos;
 }

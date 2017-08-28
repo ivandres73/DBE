@@ -25,7 +25,7 @@ void BloqueTabla::cargarDesdeDisco()
 
 void BloqueTabla::escribirEnDisco()
 {
-    char* data = new char[tamBloque];
+    char* data = new char[512];
     data = this->bloqueToChar();
     int pos = numBloque * tamBloque;
     archivo->escribir(data, pos, tamBloque);
@@ -33,7 +33,7 @@ void BloqueTabla::escribirEnDisco()
 
 char* BloqueTabla::bloqueToChar()
 {
-    char* data = new char[tamBloque];
+    char* data = new char[512];
     int pos = 0;
     memcpy(&data[pos], &numBloque, 4);
     pos += 4;
@@ -44,12 +44,12 @@ char* BloqueTabla::bloqueToChar()
     memcpy(&data[pos], &cantidadTablas, 4);
     pos += 4;
     list<Tabla*>::iterator i;
+    char* datoTabla = new char[44];
     for (i = tablas->begin(); i != tablas->end(); i++)
     {
         Tabla* tmp = *i;
-        char* datoTabla = new char[44];
         datoTabla = tmp->toChar();
-        memcpy(&data[pos], datoTabla, 44);
+        memcpy(&data[pos], &datoTabla[0], 44);
         pos += 44;
     }
     return data;
@@ -77,11 +77,11 @@ void BloqueTabla::charToBloque(char* datos)
 }
 
 
-bool BloqueTabla::agregarTabla(char nombre[20], int id, int pbr, int ubr, int pr, int ud)
+bool BloqueTabla::agregarTabla(char* nombre, int id, int pbr, int ubr, int pr, int ud)
 {
     Tabla* nuevo = new Tabla(nombre, id, pbr, ubr, pr, ud, numBloque);
-    //cout << "espacio libre: " << (int)((tamBloque - 4 - 4 - 4) / 44)-cantidadTablas << endl;
-    if (cantidadTablas < (tamBloque - sizeof(numBloque) - sizeof(siguiente) - sizeof(cantidadTablas) - sizeof(tamBloque)) / 44)
+    int tamanoDeEncabezado = sizeof(numBloque) + sizeof(siguiente) + sizeof(cantidadTablas) + sizeof(tamBloque);
+    if (cantidadTablas < 9) //deberia de ser:cantidadTablas < (tamBloque - tamanoDeEncabezado) / 44
     {
         tablas->push_back(nuevo);
         cantidadTablas++;
@@ -113,12 +113,15 @@ void BloqueTabla::imprimirTablas()
 {
     list<Tabla*>::iterator i;
     Tabla* tmp;
+    printf(" Mi cantidad de Tablas: %i", cantidadTablas);
+    printf("%c", '\n');
     for (i = tablas->begin(); i != tablas->end(); i++)
     {
         tmp = *i;
         printf("Nombre de Tabla: %s,", tmp->nombre);
         printf(" ID de tabla: %i,", tmp->id);
-        printf(" Num del primer Bloque Campo de esta tabla: %i", tmp->primerBloqueCampos);
+        printf(" Num primerBloqueCampo de esta tabla: %i,", tmp->primerBloqueCampos);
+        printf(" Num de BloquePadre: %i", tmp->numBloquePadre);
         printf("%c", '\n');
     }
 }

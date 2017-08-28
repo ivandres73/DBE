@@ -4,6 +4,7 @@
 #include <Bloque.h>
 #include <BloqueTabla.h>
 #include <BloqueCampo.h>
+#include <Campo.h>
 #include <BloqueMaestro.h>
 #include <ManejadorBloques.h>
 #include <DataFile.h>
@@ -11,27 +12,59 @@
 
 using namespace std;
 
-int main()
+void pruebaEscribir(ManejarBloque& mt)
 {
-    ManejarBloque mt = ManejarBloque();
-    //mt.formatearArchivo();
+    //mt.subir_bloques_tablas();//hay que subir los bloques tablas para no perder el siguiente
+    mt.formatearArchivo();
 
-//    for (int i=0; i < 1000; i++)
-//    {
-//        mt.addTabla("Tabla_", 0, 0, 0, 0);
-//        cout << "ultimo Bloque Tabla disponible: " << mt.bm->ultimoBloqueTablaDisponible << endl;
-//    }
+    for (int i=0; i < 100; i++)
+    {
+        mt.addTabla("Tabla_", 0, 0);
+        cout << "ultimo Bloque Tabla disponible: " << mt.bm->ultimoBloqueTablaDisponible << endl;
+    }
 
+    mt.guardar_en_secudario_bloques();
 
+    for (int i=0; i < 9; i++)
+    {
+        mt.agregarCampos(i+1, "Campo_", 1);
+    }
 
-    //mt.guardar_en_secudario_bloques();
+}
 
+void pruebaLectura(ManejarBloque& mt)
+{
     mt.subir_bloques_tablas();
     mt.listarBloqueTablas();
 
-    BloqueTabla* bt = mt.getBloqueTablaFromDisco(1081);
+    BloqueTabla* bt = mt.getBloqueTablaFromDisco(1);
     bt->imprimirTablas();
 
+}
+
+void ensenarBloques(int num)
+{
+    BloqueCampo* bc = new BloqueCampo(num);
+    bc->abrirArchivo("r");
+    bc->cargarDesdeDisco();
+    bc->cerrarArchivo();
+    bc->printCampos();
+}
+
+void mostrarDatos(char* datos)
+{
+    for (int i=0; i < 512; i++)
+    {
+        cout << "[" << i << "] :" << datos[i] << endl;
+    }
+}
+
+int main()
+{
+    ManejarBloque mt = ManejarBloque();
+    //pruebaEscribir(mt);
+    pruebaLectura(mt);
+    ensenarBloques(3);
 
     return 0;
 }
