@@ -10,12 +10,14 @@ class BloqueMaestro : public Bloque
         virtual ~BloqueMaestro();
         //atributos
         int ultimoBloqueTablaDisponible;
+        int cantidadTablas;
         int ultimoBloqueCampo;
         //funciones
         void escribirEnDisco();
         void cargarDesdeDisco();
         char* bloqueToChar();
         void charToBloque(char*);
+        void printEncabezado();
 
     protected:
 

@@ -27,10 +27,8 @@ void DataFile::cerrar()
 
 void DataFile::escribir(char* datos, int pos, int longitud)
 {
-    if(fseek(archivo, pos, SEEK_SET) == 0)
-    {
-        fwrite(datos, sizeof(char), longitud, archivo);
-    }
+    fseek(archivo, pos, SEEK_SET);
+    fwrite(datos, sizeof(char), longitud, archivo);
 }
 
 char* DataFile::leer(int pos, int longitud)

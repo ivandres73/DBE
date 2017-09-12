@@ -37,17 +37,25 @@
 		<Unit filename="include/Bloque.h" />
 		<Unit filename="include/BloqueCampo.h" />
 		<Unit filename="include/BloqueMaestro.h" />
+		<Unit filename="include/BloqueRegistro.h" />
 		<Unit filename="include/BloqueTabla.h" />
+		<Unit filename="include/Campo.h" />
 		<Unit filename="include/DataFile.h" />
+		<Unit filename="include/DatoCampo.h" />
 		<Unit filename="include/ManejadorBloques.h" />
+		<Unit filename="include/Registro.h" />
 		<Unit filename="include/Tabla.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Bloque.cpp" />
 		<Unit filename="src/BloqueCampo.cpp" />
 		<Unit filename="src/BloqueMaestro.cpp" />
+		<Unit filename="src/BloqueRegistro.cpp" />
 		<Unit filename="src/BloqueTabla.cpp" />
+		<Unit filename="src/Campo.cpp" />
 		<Unit filename="src/DataFile.cpp" />
+		<Unit filename="src/DatoCampo.cpp" />
 		<Unit filename="src/ManejadorBloques.cpp" />
+		<Unit filename="src/Registro.cpp" />
 		<Unit filename="src/Tabla.cpp" />
 		<Extensions>
 			<code_completion />

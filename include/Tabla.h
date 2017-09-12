@@ -2,6 +2,13 @@
 #define TABLA_H
 
 #include <string.h>
+#include <BloqueCampo.h>
+#include <BloqueRegistro.h>
+#include <Registro.h>
+#include <Campo.h>
+#include <list>
+
+using namespace std;
 
 class Tabla
 {
@@ -14,12 +21,16 @@ class Tabla
         int id;
         int primerBloqueCampos;
         int ultimoBloqueCampos;
-        int primerDatos;//
-        int actualDatos;//nose para qe es esto
+        int primerDatos;
+        int actualDatos;
         int numBloquePadre;
+        list<Campo*>* campos;
         //funciones
         char* toChar();//crea un char de 44bytes
         void charToTabla(char*);
+        void printCampos();
+        void cargarCampos();
+        void printRegistros();
 
     protected:
 

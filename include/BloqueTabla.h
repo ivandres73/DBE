@@ -3,6 +3,7 @@
 
 #include <Bloque.h>
 #include <BloqueCampo.h>
+#include <BloqueRegistro.h>
 #include <Tabla.h>
 #include <list>
 
@@ -24,9 +25,11 @@ class BloqueTabla : public Bloque
         char* bloqueToChar();
         void charToBloque(char*);
         void imprimirTablas();
+        Tabla* buscarTabla(int);
         //funciones propias
-        bool agregarTabla(char[20], int, int, int, int, int);
+        bool agregarTabla(char*, int, int, int, int, int);
         void asignarBloqueCampo(int, BloqueCampo*);
+        void asignarBloqueRegistro(int, BloqueRegistro*);
 
     protected:
 
