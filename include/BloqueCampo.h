@@ -24,7 +24,7 @@ class BloqueCampo : public Bloque
         void charToBloque(char*);
         //funciones propias
         bool agregarCampo(char*, bool);
-        void asignarBloqueRegistros(int/*, BloqueRegistro*/);
+        Campo* getCampo(int);
         void printCampos();
 
     protected:

@@ -14,6 +14,7 @@ Tabla::Tabla(char* n, int i, int p, int u, int pd, int ad, int nbp)
     primerDatos = pd;
     actualDatos = ad;
     numBloquePadre = nbp;
+    campos = new list<Campo*>;
 }
 
 Tabla::~Tabla()
@@ -59,4 +60,64 @@ void Tabla::charToTabla(char* datos)
     pos += 4;
     memcpy(&numBloquePadre, &datos[pos], 4);
     pos += 4;
+}
+
+void Tabla::printCampos()
+{
+    int tmp = primerBloqueCampos;
+    if (tmp == -1)
+    {
+        return;
+    }
+    do
+    {
+        BloqueCampo* bc = new BloqueCampo(tmp);
+        bc->abrirArchivo("r");
+        bc->cargarDesdeDisco();
+        bc->cerrarArchivo();
+        bc->printCampos();
+        tmp = bc->siguiente;
+    } while (tmp != -1);
+}
+
+void Tabla::cargarCampos()
+{
+    int tmp = primerBloqueCampos;
+    if (tmp == -1)
+    {
+        return;
+    }
+    do
+    {
+        BloqueCampo* bc = new BloqueCampo(tmp);
+        bc->abrirArchivo("r");
+        bc->cargarDesdeDisco();
+        bc->cerrarArchivo();
+        Campo* campoTMP;
+        for (int i=0; i < bc->cantidadDeCampos; i++)
+        {
+            campoTMP = bc->getCampo(i);
+            campos->push_back(campoTMP);
+        }
+        tmp = bc->siguiente;
+    } while (tmp != -1);
+}
+
+void Tabla::printRegistros()
+{
+    int tmp = primerDatos;
+    if (tmp == -1)
+    {
+        return;
+    }
+    BloqueRegistro* br;
+    do
+    {
+        br = new BloqueRegistro(tmp);
+        br->abrirArchivo("r");
+        br->cargarDesdeDisco();
+        br->cerrarArchivo();
+        br->printAllRegistros();
+        tmp = br->siguiente;
+    } while (tmp != -1);
 }

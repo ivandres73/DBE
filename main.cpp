@@ -9,65 +9,51 @@
 #include <ManejadorBloques.h>
 #include <DataFile.h>
 #include <list>
+#include <DatoCampo.h>
+#include <Registro.h>
+#include <BloqueRegistro.h>
 
 using namespace std;
 
-void pruebaEscribir(ManejarBloque& mt)
+void pruebaEscribirTablas(ManejarBloque& mt)
 {
-    //mt.subir_bloques_tablas();//hay que subir los bloques tablas para no perder el siguiente
-    mt.formatearArchivo();
-
-    for (int i=0; i < 100; i++)
+    for (int i=0; i < 19; i++)
     {
-        mt.addTabla("Tabla_", 0, 0);
-        cout << "ultimo Bloque Tabla disponible: " << mt.bm->ultimoBloqueTablaDisponible << endl;
+        mt.addTabla2("Tabla_");
     }
-
-    mt.guardar_en_secudario_bloques();
-
-    for (int i=0; i < 9; i++)
-    {
-        mt.agregarCampos(i+1, "Nombre", 1);
-        mt.agregarCampos(i+1, "Apellido", 1);
-        mt.agregarCampos(i+1, "Edad", 0);
-        mt.agregarCampos(i+1, "Direccion", 1);
-    }
-
 }
 
-void pruebaLectura(ManejarBloque& mt)
+void pruebaEscribirCampos(ManejarBloque& mt)
 {
-    mt.subir_bloques_tablas();
-    mt.listarBloqueTablas();
+    int num = 19;
 
-    BloqueTabla* bt = mt.getBloqueTablaFromDisco(1);
-    bt->imprimirTablas();
-
-}
-
-void ensenarBloques(int num)
-{
-    BloqueCampo* bc = new BloqueCampo(num);
-    bc->abrirArchivo("r");
-    bc->cargarDesdeDisco();
-    bc->cerrarArchivo();
-    bc->printCampos();
-}
-
-void mostrarDatos(char* datos)
-{
-    for (int i=0; i < 512; i++)
-    {
-        cout << "[" << i << "] :" << datos[i] << endl;
-    }
+    mt.addCampo2(num, "Nombre", 1);
+    mt.addCampo2(num, "Apellido", 1);
+    mt.addCampo2(num, "Edad", 0);
+    mt.addCampo2(num, "Direccion", 1);
 }
 
 int main()
 {
     ManejarBloque mt = ManejarBloque();
-    //pruebaEscribir(mt);
-    pruebaLectura(mt);
-    ensenarBloques(3);
+
+    //mt.formatearArchivo2();
+    //pruebaEscribirTablas(mt);
+    //pruebaEscribirCampos(mt);
+
+    mt.listarBloqueTablas2();
+
+    BloqueTabla* blota = new BloqueTabla(3);
+    blota->abrirArchivo("r");
+    blota->cargarDesdeDisco();
+    blota->cerrarArchivo();
+    blota->imprimirTablas();
+
+    Tabla* ivan = mt.getTabla2(19);
+    ivan->printCampos();
+
+    mt.addRegistroToTabla2(19);
+    mt.printRegistrosFromTabla(19);
 
     return 0;
 }

@@ -95,12 +95,6 @@ bool BloqueCampo::agregarCampo(char* nombre, bool tipo)
     }
 }
 
-void BloqueCampo::asignarBloqueRegistros(int/*, BloqueRegistro*/)
-{
-
-}
-
-
 void BloqueCampo::printCampos()
 {
     list<Campo*>::iterator i;
@@ -116,4 +110,16 @@ void BloqueCampo::printCampos()
         printf("num de mi Bloque papa: %i", tmp->numBloquePadre);
         printf("%c", '\n');
     }
+}
+
+Campo* BloqueCampo::getCampo(int index)
+{
+    if (index > campos->size())
+    {
+        return 0;
+    }
+    list<Campo*>::iterator i = campos->begin();
+    advance(i, index);
+    Campo* tmp = *i;
+    return tmp;
 }

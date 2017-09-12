@@ -4,6 +4,8 @@
 
 #include <BloqueTabla.h>
 #include <Tabla.h>
+#include <BloqueRegistro.h>
+#include <Registro.h>
 #include <BloqueMaestro.h>
 #include <DataFile.h>
 #include <list>
@@ -27,16 +29,26 @@ class ManejarBloque
         void addBloqueTabla();
         void addBloqueCampo();
         void addBloqueMaestro();
-        void addTabla(char* nombre, int pr, int ud);
-        void guardar_en_secudario_bloques();
-        void subir_bloques_a_primario();
-        void subir_bloques_tablas();
-        void formatearArchivo();
-        void agregarCampos(int, char*, bool);///trabajar en esta luego
-        void printCamposFrom(int);
+        void addTabla(char*, int, int);
+        ///Intento de hacerlo mejor
+        void addTabla2(char*);
+        void formatearArchivo2();
+        void guardarBloquesAlArchivo2();
+        void addCampo2(int, char*, bool);
+        Tabla* getTabla2(int);
+        void listarBloqueTablas2();
+        void printBloqueMaster();
         BloqueTabla* getBloqueTablaFromDisco(int);
         BloqueMaestro* getBloqueMasterFromDisco();
         BloqueCampo* getBloqueCampoFromDisco(int);
+        int PosUltimoBloqueTabla();
+        void addRegistroToTabla2(int);
+        Registro* makeRegistro(Tabla*);
+        void printRegistrosFromTabla(int);
+        ///
+        void formatearArchivo();
+        void printCamposFrom(int);
+        Tabla* getTabla(int);
 
     protected:
 

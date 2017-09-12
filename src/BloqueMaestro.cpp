@@ -62,3 +62,10 @@ void BloqueMaestro::charToBloque(char* datos)
     memcpy(&cantidadTablas, &datos[pos], 4);
     pos += 4;
 }
+
+void BloqueMaestro::printEncabezado()
+{
+    printf("Ultimo Bloque Tablas Disponible: %i %c", ultimoBloqueTablaDisponible, '\n');
+    printf("Cantidad de Tablas: %i %c", cantidadTablas, '\n');
+    printf("Ultimo Bloque de Campos: %i %c", ultimoBloqueCampo, '\n');
+}

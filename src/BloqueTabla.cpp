@@ -109,19 +109,61 @@ void BloqueTabla::asignarBloqueCampo(int id, BloqueCampo* bloque)
     printf("no se encontro la tabla con ese id %c", '\n');
 }
 
+void BloqueTabla::asignarBloqueRegistro(int id, BloqueRegistro* bloque)
+{
+    list<Tabla*>::iterator i;
+    for (i = tablas->begin(); i != tablas->end(); i++)
+    {
+        Tabla* tmp = *i;
+        if (id == tmp->id)
+        {
+            tmp->primerDatos = bloque->numBloque;
+            return;
+        }
+    }
+    printf("no se encontro la tabla con ese id %c", '\n');
+}
+
 void BloqueTabla::imprimirTablas()
 {
     list<Tabla*>::iterator i;
     Tabla* tmp;
+    printf("%cSoy el bloque tabla # %i", '\t', numBloque);
     printf(" Mi cantidad de Tablas: %i", cantidadTablas);
     printf("%c", '\n');
     for (i = tablas->begin(); i != tablas->end(); i++)
     {
         tmp = *i;
-        printf("Nombre de Tabla: %s,", tmp->nombre);
-        printf(" ID de tabla: %i,", tmp->id);
-        printf(" Num primerBloqueCampo de esta tabla: %i,", tmp->primerBloqueCampos);
-        printf(" Num de BloquePadre: %i", tmp->numBloquePadre);
+        printf("Nombre: %s,", tmp->nombre);
+        printf(" ID: %i,", tmp->id);
+        printf(" primerBloqueCampo: %i,", tmp->primerBloqueCampos);
+        printf(" ultimoBloqueCampo: %i,", tmp->ultimoBloqueCampos);
+        printf(" BloquePadre: %i", tmp->numBloquePadre);
+        printf(" primerDatos: %i,", tmp->primerDatos);
+        printf(" actualDatos: %i", tmp->actualDatos);
         printf("%c", '\n');
     }
+}
+
+Tabla* BloqueTabla::buscarTabla(int tablaID)
+{
+    if (tablas->empty())
+    {
+        return 0;
+    }
+    else
+    {
+        list<Tabla*>::iterator i;
+        Tabla* tmp;
+        for (i = tablas->begin(); i != tablas->end(); i++)
+        {
+            tmp = *i;
+            if (tmp->id == tablaID)
+            {
+                cout << "\n****************ENTONTRE LA TABLA****************\n";
+                return tmp;
+            }
+        }
+    }
+    return 0;
 }

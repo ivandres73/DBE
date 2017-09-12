@@ -17,6 +17,7 @@ class BloqueMaestro : public Bloque
         void cargarDesdeDisco();
         char* bloqueToChar();
         void charToBloque(char*);
+        void printEncabezado();
 
     protected:
 

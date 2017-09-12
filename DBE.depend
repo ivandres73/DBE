@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1503954807 source:c:\users\ivand\documents\codeblocks proyects\dbe\main.cpp
+1505191281 source:c:\users\ivand\documents\codeblocks proyects\dbe\main.cpp
 	<iostream>
 	<stdio.h>
 	<Bloque.h>
@@ -10,6 +10,9 @@
 	<ManejadorBloques.h>
 	<DataFile.h>
 	<list>
+	<DatoCampo.h>
+	<Registro.h>
+	<BloqueRegistro.h>
 
 1503873202 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\datafile.cpp
 	"DataFile.h"
@@ -25,43 +28,51 @@
 	<stdio.h>
 	<string.h>
 
-1503901729 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquecampo.cpp
+1504741054 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquecampo.cpp
 	"BloqueCampo.h"
 
-1502722841 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloquecampo.h
+1505023855 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloquecampo.h
 	<Bloque.h>
 	<Campo.h>
 	<list>
 	<iostream>
 
-1503953203 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquetabla.cpp
+1505148301 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquetabla.cpp
 	"BloqueTabla.h"
 
-1502722841 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloquetabla.h
+1505145949 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloquetabla.h
 	<Bloque.h>
 	<BloqueCampo.h>
+	<BloqueRegistro.h>
 	<Tabla.h>
 	<list>
 	<iostream>
 
-1503861185 c:\users\ivand\documents\codeblocks proyects\dbe\include\tabla.h
+1505147249 c:\users\ivand\documents\codeblocks proyects\dbe\include\tabla.h
 	<string.h>
+	<BloqueCampo.h>
+	<BloqueRegistro.h>
+	<Registro.h>
+	<Campo.h>
+	<list>
 
-1503861178 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\tabla.cpp
+1505147249 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\tabla.cpp
 	"Tabla.h"
 
-1502736305 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquemaestro.cpp
+1504305462 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquemaestro.cpp
 	"BloqueMaestro.h"
 
-1502648406 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloquemaestro.h
+1504305463 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloquemaestro.h
 	<Bloque.h>
 
-1503952400 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\manejadorbloques.cpp
+1505191240 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\manejadorbloques.cpp
 	"ManejadorBloques.h"
 
-1503903035 c:\users\ivand\documents\codeblocks proyects\dbe\include\manejadorbloques.h
+1505191958 c:\users\ivand\documents\codeblocks proyects\dbe\include\manejadorbloques.h
 	<BloqueTabla.h>
 	<Tabla.h>
+	<BloqueRegistro.h>
+	<Registro.h>
 	<BloqueMaestro.h>
 	<DataFile.h>
 	<list>
@@ -72,4 +83,32 @@
 
 1502735910 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\campo.cpp
 	"Campo.h"
+
+1505141731 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloqueregistro.cpp
+	"BloqueRegistro.h"
+
+1505141731 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloqueregistro.h
+	<Bloque.h>
+	<Registro.h>
+	<Campo.h>
+	<iostream>
+	<list>
+	<string>
+
+1505107410 c:\users\ivand\documents\codeblocks proyects\dbe\include\registro.h
+	<list>
+	<DatoCampo.h>
+	<Campo.h>
+	<string>
+
+1505107429 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\registro.cpp
+	"Registro.h"
+
+1505087401 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\datocampo.cpp
+	"DatoCampo.h"
+
+1505085549 c:\users\ivand\documents\codeblocks proyects\dbe\include\datocampo.h
+	<Campo.h>
+	<iostream>
+	<string>
 
