@@ -18,17 +18,25 @@ BloqueTabla::~BloqueTabla()
 
 void BloqueTabla::cargarDesdeDisco()
 {
+    this->abrirArchivo("r");
+
     int pos = numBloque * tamBloque;
     char* data = archivo->leer(pos, tamBloque);
     charToBloque(data);
+
+    this->cerrarArchivo();
 }
 
 void BloqueTabla::escribirEnDisco()
 {
+    this->abrirArchivo("r+");
+
     char* data = new char[512];
     data = this->bloqueToChar();
     int pos = numBloque * tamBloque;
     archivo->escribir(data, pos, tamBloque);
+
+    this->cerrarArchivo();
 }
 
 char* BloqueTabla::bloqueToChar()
@@ -70,7 +78,6 @@ void BloqueTabla::charToBloque(char* datos)
     {
         Tabla* tabla = new Tabla("vacio", 0, 0, 0, 0, 0, 0);
         tabla->charToTabla(&datos[pos]);
-        //cout << tabla->nombre << endl;
         tablas->push_back(tabla);
         pos += 44;
     }

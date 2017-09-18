@@ -19,17 +19,10 @@ class ManejarBloque
         ManejarBloque();
         virtual ~ManejarBloque();
         //atributos
-        std::list<Bloque*> listaBloques;
         DataFile* archivo;
         BloqueMaestro* bm;
         BloqueTabla* bt;
         BloqueCampo* bc;
-        //funciones
-        void listarBloqueTablas();
-        void addBloqueTabla();
-        void addBloqueCampo();
-        void addBloqueMaestro();
-        void addTabla(char*, int, int);
         ///Intento de hacerlo mejor
         void addTabla2(char*);
         void formatearArchivo2();
@@ -40,15 +33,11 @@ class ManejarBloque
         void printBloqueMaster();
         BloqueTabla* getBloqueTablaFromDisco(int);
         BloqueMaestro* getBloqueMasterFromDisco();
-        BloqueCampo* getBloqueCampoFromDisco(int);
         int PosUltimoBloqueTabla();
         void addRegistroToTabla2(int);
         Registro* makeRegistro(Tabla*);
         void printRegistrosFromTabla(int);
-        ///
-        void formatearArchivo();
         void printCamposFrom(int);
-        Tabla* getTabla(int);
 
     protected:
 
