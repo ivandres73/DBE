@@ -17,7 +17,7 @@ using namespace std;
 
 void pruebaEscribirTablas(ManejarBloque& mt)
 {
-    for (int i=0; i < 19; i++)
+    for (int i=0; i < 1; i++)
     {
         mt.addTabla2("Tabla_");
     }
@@ -25,8 +25,9 @@ void pruebaEscribirTablas(ManejarBloque& mt)
 
 void pruebaEscribirCampos(ManejarBloque& mt)
 {
-    int num = 19;
+    int num = 1;
 
+    mt.addCampo2(num, "ID", 1);
     mt.addCampo2(num, "Nombre", 1);
     mt.addCampo2(num, "Apellido", 1);
     mt.addCampo2(num, "Edad", 0);
@@ -43,17 +44,16 @@ int main()
 
     mt.listarBloqueTablas2();
 
-    BloqueTabla* blota = new BloqueTabla(3);
-    blota->abrirArchivo("r");
+    BloqueTabla* blota = new BloqueTabla(1);
+
     blota->cargarDesdeDisco();
-    blota->cerrarArchivo();
+
     blota->imprimirTablas();
 
-    Tabla* ivan = mt.getTabla2(19);
-    ivan->printCampos();
+    mt.printCamposFrom(1);
 
-    mt.addRegistroToTabla2(19);
-    mt.printRegistrosFromTabla(19);
+    mt.addRegistroToTabla2(1);
+    mt.printRegistrosFromTabla(1);
 
     return 0;
 }

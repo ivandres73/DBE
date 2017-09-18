@@ -18,17 +18,25 @@ BloqueCampo::~BloqueCampo()
 
 void BloqueCampo::cargarDesdeDisco()
 {
+    this->abrirArchivo("r");
+
     int pos = numBloque * tamBloque;
     char* data = archivo->leer(pos, tamBloque);
     charToBloque(data);
+
+    this->cerrarArchivo();
 }
 
 void BloqueCampo::escribirEnDisco()
 {
+    this->abrirArchivo("r+");
+
     char* data = new char[tamBloque];
     data = this->bloqueToChar();
     int pos = numBloque * tamBloque;
     archivo->escribir(data, pos, tamBloque);
+
+    this->cerrarArchivo();
 }
 
 char* BloqueCampo::bloqueToChar()

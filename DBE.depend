@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1505191281 source:c:\users\ivand\documents\codeblocks proyects\dbe\main.cpp
+1505708757 source:c:\users\ivand\documents\codeblocks proyects\dbe\main.cpp
 	<iostream>
 	<stdio.h>
 	<Bloque.h>
@@ -28,7 +28,7 @@
 	<stdio.h>
 	<string.h>
 
-1504741054 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquecampo.cpp
+1505708529 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquecampo.cpp
 	"BloqueCampo.h"
 
 1505023855 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloquecampo.h
@@ -37,7 +37,7 @@
 	<list>
 	<iostream>
 
-1505148301 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquetabla.cpp
+1505708529 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquetabla.cpp
 	"BloqueTabla.h"
 
 1505145949 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloquetabla.h
@@ -59,16 +59,16 @@
 1505147249 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\tabla.cpp
 	"Tabla.h"
 
-1504305462 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquemaestro.cpp
+1505708529 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloquemaestro.cpp
 	"BloqueMaestro.h"
 
 1504305463 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloquemaestro.h
 	<Bloque.h>
 
-1505191240 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\manejadorbloques.cpp
+1505708720 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\manejadorbloques.cpp
 	"ManejadorBloques.h"
 
-1505191958 c:\users\ivand\documents\codeblocks proyects\dbe\include\manejadorbloques.h
+1505708720 c:\users\ivand\documents\codeblocks proyects\dbe\include\manejadorbloques.h
 	<BloqueTabla.h>
 	<Tabla.h>
 	<BloqueRegistro.h>
@@ -84,7 +84,7 @@
 1502735910 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\campo.cpp
 	"Campo.h"
 
-1505141731 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloqueregistro.cpp
+1505708529 source:c:\users\ivand\documents\codeblocks proyects\dbe\src\bloqueregistro.cpp
 	"BloqueRegistro.h"
 
 1505141731 c:\users\ivand\documents\codeblocks proyects\dbe\include\bloqueregistro.h

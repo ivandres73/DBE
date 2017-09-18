@@ -15,16 +15,24 @@ BloqueMaestro::~BloqueMaestro()
 
 void BloqueMaestro::escribirEnDisco()
 {
+    this->abrirArchivo("r+");
+
     char* data = this->bloqueToChar();
     int pos = numBloque * tamBloque;
     archivo->escribir(data, pos, tamBloque);
+
+    this->cerrarArchivo();
 }
 
 void BloqueMaestro::cargarDesdeDisco()
 {
+    this->abrirArchivo("r");
+
     int pos = numBloque * tamBloque;
     char* data = archivo->leer(pos, tamBloque);
     charToBloque(data);
+
+    this->cerrarArchivo();
 }
 
 char* BloqueMaestro::bloqueToChar()
